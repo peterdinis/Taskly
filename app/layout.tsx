@@ -14,12 +14,21 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Taskly – Smart Task & Productivity Manager",
-  description: "Taskly helps you organize your tasks, projects, and daily goals efficiently. A modern task manager inspired by Todoist, designed for productivity and focus.",
-  keywords: ["Taskly", "Todoist clone", "task manager", "productivity app", "task tracker", "project management"],
+  description:
+    "Taskly helps you organize your tasks, projects, and daily goals efficiently. A modern task manager inspired by Todoist, designed for productivity and focus.",
+  keywords: [
+    "Taskly",
+    "Todoist clone",
+    "task manager",
+    "productivity app",
+    "task tracker",
+    "project management",
+  ],
   authors: [{ name: "Taskly Team", url: "https://yourwebsite.com" }],
   openGraph: {
     title: "Taskly – Smart Task & Productivity Manager",
-    description: "Organize your tasks, projects, and daily goals efficiently with Taskly, a modern Todoist-inspired task manager.",
+    description:
+      "Organize your tasks, projects, and daily goals efficiently with Taskly, a modern Todoist-inspired task manager.",
     url: "https://yourwebsite.com",
     siteName: "Taskly",
     type: "website",
@@ -35,7 +44,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Taskly – Smart Task & Productivity Manager",
-    description: "Organize your tasks, projects, and daily goals efficiently with Taskly, a modern Todoist-inspired task manager.",
+    description:
+      "Organize your tasks, projects, and daily goals efficiently with Taskly, a modern Todoist-inspired task manager.",
     images: ["https://yourwebsite.com/og-image.png"],
     site: "@tasklyapp",
     creator: "@tasklyapp",

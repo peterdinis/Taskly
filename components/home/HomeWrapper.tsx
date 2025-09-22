@@ -1,5 +1,11 @@
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Check, CheckCircle, Calendar, Flag, Users, Zap } from "lucide-react";
 import Link from "next/link";
 import { FC } from "react";
@@ -9,46 +15,49 @@ const features = [
   {
     icon: CheckCircle,
     title: "Smart Task Management",
-    description: "Organize your tasks with priorities, due dates, and projects"
+    description: "Organize your tasks with priorities, due dates, and projects",
   },
   {
     icon: Calendar,
-    title: "Date & Time Planning", 
-    description: "Schedule tasks and never miss important deadlines"
+    title: "Date & Time Planning",
+    description: "Schedule tasks and never miss important deadlines",
   },
   {
     icon: Flag,
     title: "Priority Levels",
-    description: "Focus on what matters most with color-coded priorities"
+    description: "Focus on what matters most with color-coded priorities",
   },
   {
     icon: Users,
     title: "Project Organization",
-    description: "Keep work and personal tasks separate with custom projects"
+    description: "Keep work and personal tasks separate with custom projects",
   },
   {
     icon: Zap,
     title: "Lightning Fast",
-    description: "Built with modern technology for optimal performance"
-  }
+    description: "Built with modern technology for optimal performance",
+  },
 ];
 
 const testimonials = [
   {
     name: "Sarah Johnson",
     role: "Product Manager",
-    content: "This app has completely transformed how I manage my daily tasks. The interface is clean and intuitive."
+    content:
+      "This app has completely transformed how I manage my daily tasks. The interface is clean and intuitive.",
   },
   {
-    name: "Mike Chen", 
+    name: "Mike Chen",
     role: "Freelance Designer",
-    content: "Finally, a todo app that doesn't get in the way. I can focus on my work instead of managing the tool."
+    content:
+      "Finally, a todo app that doesn't get in the way. I can focus on my work instead of managing the tool.",
   },
   {
     name: "Emma Davis",
     role: "Student",
-    content: "Perfect for keeping track of assignments and deadlines. The priority system is a game-changer."
-  }
+    content:
+      "Perfect for keeping track of assignments and deadlines. The priority system is a game-changer.",
+  },
 ];
 
 const HomeWrapper: FC = () => {
@@ -61,14 +70,15 @@ const HomeWrapper: FC = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto text-center max-w-4xl">
           <h1 className="text-5xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-            Organize Your Life, 
-            <br />One Task at a Time
+            Organize Your Life,
+            <br />
+            One Task at a Time
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
-            The powerful yet simple task management app that helps you stay focused, 
-            meet deadlines, and achieve your goals with ease.
+            The powerful yet simple task management app that helps you stay
+            focused, meet deadlines, and achieve your goals with ease.
           </p>
-          
+
           <div className="flex items-center justify-center gap-4 mb-12">
             <Button size="lg" asChild>
               <Link href="/app">Start Organizing</Link>
@@ -113,12 +123,14 @@ const HomeWrapper: FC = () => {
       <section className="py-20 px-4 bg-muted/30">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Everything You Need to Stay Productive</h2>
+            <h2 className="text-3xl font-bold mb-4">
+              Everything You Need to Stay Productive
+            </h2>
             <p className="text-lg text-muted-foreground">
               Powerful features designed to help you manage tasks efficiently
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => (
               <Card key={index} className="border-none shadow-sm">
@@ -141,20 +153,26 @@ const HomeWrapper: FC = () => {
       <section className="py-20 px-4">
         <div className="container mx-auto max-w-6xl">
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold mb-4">Loved by Thousands of Users</h2>
+            <h2 className="text-3xl font-bold mb-4">
+              Loved by Thousands of Users
+            </h2>
             <p className="text-lg text-muted-foreground">
               See what our users say about TaskMaster
             </p>
           </div>
-          
+
           <div className="grid md:grid-cols-3 gap-8">
             {testimonials.map((testimonial, index) => (
               <Card key={index} className="border-none shadow-sm">
                 <CardContent className="pt-6">
-                  <p className="text-muted-foreground mb-4">"{testimonial.content}"</p>
+                  <p className="text-muted-foreground mb-4">
+                    "{testimonial.content}"
+                  </p>
                   <div>
                     <p className="font-semibold">{testimonial.name}</p>
-                    <p className="text-sm text-muted-foreground">{testimonial.role}</p>
+                    <p className="text-sm text-muted-foreground">
+                      {testimonial.role}
+                    </p>
                   </div>
                 </CardContent>
               </Card>
@@ -168,7 +186,8 @@ const HomeWrapper: FC = () => {
         <div className="container mx-auto text-center max-w-4xl">
           <h2 className="text-4xl font-bold mb-6">Ready to Get Organized?</h2>
           <p className="text-xl mb-8 opacity-90">
-            Join thousands of users who have transformed their productivity with TaskMaster
+            Join thousands of users who have transformed their productivity with
+            TaskMaster
           </p>
           <Button size="lg" variant="secondary" asChild>
             <Link href="/app">Start Your Journey</Link>
@@ -189,7 +208,7 @@ const HomeWrapper: FC = () => {
                 The ultimate task management solution for modern professionals.
               </p>
             </div>
-            
+
             <div>
               <h3 className="font-semibold mb-4">Product</h3>
               <div className="space-y-2 text-muted-foreground">
@@ -198,7 +217,7 @@ const HomeWrapper: FC = () => {
                 <p>Updates</p>
               </div>
             </div>
-            
+
             <div>
               <h3 className="font-semibold mb-4">Support</h3>
               <div className="space-y-2 text-muted-foreground">
@@ -207,7 +226,7 @@ const HomeWrapper: FC = () => {
                 <p>Community</p>
               </div>
             </div>
-            
+
             <div>
               <h3 className="font-semibold mb-4">Company</h3>
               <div className="space-y-2 text-muted-foreground">
@@ -217,7 +236,7 @@ const HomeWrapper: FC = () => {
               </div>
             </div>
           </div>
-          
+
           <div className="border-t mt-12 pt-8 text-center text-muted-foreground">
             <p>&copy; 2025 TaskMaster. All rights reserved.</p>
           </div>

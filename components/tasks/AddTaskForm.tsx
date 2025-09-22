@@ -1,8 +1,16 @@
-import { useState } from "react";
+"use client";
+
+import { useState, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Flag, Calendar } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { Plus, Flag } from "lucide-react";
 import { Task } from "./TaskItem";
 
 interface Project {
@@ -19,14 +27,18 @@ interface AddTaskFormProps {
   selectedProject: string;
 }
 
-const AddTaskForm = ({ onAddTask, projects, selectedProject }: AddTaskFormProps) => {
+const AddTaskForm = ({
+  onAddTask,
+  projects,
+  selectedProject,
+}: AddTaskFormProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [title, setTitle] = useState("");
   const [priority, setPriority] = useState<Task["priority"]>("none");
   const [dueDate, setDueDate] = useState("");
   const [project, setProject] = useState(selectedProject);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!title.trim()) return;
 
@@ -34,7 +46,7 @@ const AddTaskForm = ({ onAddTask, projects, selectedProject }: AddTaskFormProps)
       title: title.trim(),
       priority,
       dueDate: dueDate || undefined,
-      project
+      project,
     });
 
     setTitle("");
@@ -57,7 +69,10 @@ const AddTaskForm = ({ onAddTask, projects, selectedProject }: AddTaskFormProps)
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-3 p-3 border rounded-lg bg-card">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-3 p-3 border rounded-lg bg-card"
+    >
       <Input
         placeholder="Task name"
         value={title}
@@ -65,9 +80,12 @@ const AddTaskForm = ({ onAddTask, projects, selectedProject }: AddTaskFormProps)
         autoFocus
         className="border-none shadow-none text-base placeholder:text-muted-foreground"
       />
-      
+
       <div className="flex items-center gap-2">
-        <Select value={priority} onValueChange={(value: Task["priority"]) => setPriority(value)}>
+        <Select
+          value={priority}
+          onValueChange={(value: Task["priority"]) => setPriority(value)}
+        >
           <SelectTrigger className="w-auto border-none shadow-none">
             <Flag className="h-4 w-4 mr-1" />
             <SelectValue placeholder="Priority" />
@@ -95,8 +113,8 @@ const AddTaskForm = ({ onAddTask, projects, selectedProject }: AddTaskFormProps)
             {projects.map((proj) => (
               <SelectItem key={proj.id} value={proj.name}>
                 <div className="flex items-center gap-2">
-                  <div 
-                    className="h-3 w-3 rounded-full" 
+                  <div
+                    className="h-3 w-3 rounded-full"
                     style={{ backgroundColor: proj.color }}
                   />
                   {proj.name}
@@ -106,7 +124,7 @@ const AddTaskForm = ({ onAddTask, projects, selectedProject }: AddTaskFormProps)
           </SelectContent>
         </Select>
       </div>
-      
+
       <div className="flex items-center gap-2">
         <Button type="submit" size="sm">
           Add task
