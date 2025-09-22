@@ -2,7 +2,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Plus, Palette } from "lucide-react";
 import { RichTextEditor } from "../editor/RichTextEditor";
@@ -21,7 +27,7 @@ interface CreateProjectDialogProps {
 
 const projectColors = [
   "#EF4444", // red
-  "#F97316", // orange  
+  "#F97316", // orange
   "#EAB308", // yellow
   "#22C55E", // green
   "#3B82F6", // blue
@@ -33,10 +39,12 @@ const projectColors = [
 const colorVariants = {
   initial: { scale: 1 },
   hover: { scale: 1.1 },
-  tap: { scale: 0.95 }
+  tap: { scale: 0.95 },
 };
 
-export const CreateProjectDialog = ({ onCreateProject }: CreateProjectDialogProps) => {
+export const CreateProjectDialog = ({
+  onCreateProject,
+}: CreateProjectDialogProps) => {
   const [open, setOpen] = useState(false);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -49,7 +57,7 @@ export const CreateProjectDialog = ({ onCreateProject }: CreateProjectDialogProp
     onCreateProject({
       name: name.trim(),
       description: description.trim() || undefined,
-      color: selectedColor
+      color: selectedColor,
     });
 
     setName("");
@@ -61,29 +69,26 @@ export const CreateProjectDialog = ({ onCreateProject }: CreateProjectDialogProp
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <motion.div
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-        >
+        <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
           <Button variant="ghost" size="sm" className="h-6 w-6 p-0">
             <Plus className="h-3 w-3" />
           </Button>
         </motion.div>
       </DialogTrigger>
-      
+
       <DialogContent className="sm:max-w-[500px]">
         <DialogHeader>
           <DialogTitle>Create New Project</DialogTitle>
         </DialogHeader>
-        
-        <motion.form 
-          onSubmit={handleSubmit} 
+
+        <motion.form
+          onSubmit={handleSubmit}
           className="space-y-6"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.3 }}
         >
-          <motion.div 
+          <motion.div
             className="space-y-2"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -98,8 +103,8 @@ export const CreateProjectDialog = ({ onCreateProject }: CreateProjectDialogProp
               autoFocus
             />
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="space-y-2"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -113,8 +118,8 @@ export const CreateProjectDialog = ({ onCreateProject }: CreateProjectDialogProp
               className="min-h-[120px]"
             />
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="space-y-3"
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
@@ -129,9 +134,10 @@ export const CreateProjectDialog = ({ onCreateProject }: CreateProjectDialogProp
                     key={color}
                     type="button"
                     className="w-8 h-8 rounded-full border-2 transition-all relative"
-                    style={{ 
+                    style={{
                       backgroundColor: color,
-                      borderColor: selectedColor === color ? color : "transparent",
+                      borderColor:
+                        selectedColor === color ? color : "transparent",
                     }}
                     onClick={() => setSelectedColor(color)}
                     variants={colorVariants}
@@ -152,20 +158,21 @@ export const CreateProjectDialog = ({ onCreateProject }: CreateProjectDialogProp
               </div>
             </div>
           </motion.div>
-          
-          <motion.div 
+
+          <motion.div
             className="flex justify-end gap-3 pt-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4 }}
           >
-            <Button type="button" variant="outline" onClick={() => setOpen(false)}>
+            <Button
+              type="button"
+              variant="outline"
+              onClick={() => setOpen(false)}
+            >
               Cancel
             </Button>
-            <motion.div
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
+            <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
               <Button type="submit" disabled={!name.trim()}>
                 Create Project
               </Button>

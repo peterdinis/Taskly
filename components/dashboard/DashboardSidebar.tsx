@@ -1,13 +1,13 @@
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { 
-  Inbox, 
-  Calendar, 
-  CalendarDays, 
+import {
+  Inbox,
+  Calendar,
+  CalendarDays,
   Filter,
   User,
   BarChart3,
-  Archive
+  Archive,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SettingsDialog } from "../settings/SettingsDialog";
@@ -44,16 +44,24 @@ const bottomItems = [
   { id: "archive", label: "Archive", icon: Archive },
 ];
 
-export const DashbaordSidebar = ({ selectedProject, onProjectSelect, projects, taskCounts, onCreateProject, settings, onSettingsChange }: DashbaordSidebarProps) => {
+export const DashbaordSidebar = ({
+  selectedProject,
+  onProjectSelect,
+  projects,
+  taskCounts,
+  onCreateProject,
+  settings,
+  onSettingsChange,
+}: DashbaordSidebarProps) => {
   return (
-    <motion.div 
+    <motion.div
       className="w-64 bg-sidebar-bg border-r border-sidebar-border flex flex-col"
       initial={{ x: -20, opacity: 0 }}
       animate={{ x: 0, opacity: 1 }}
       transition={{ duration: 0.3 }}
     >
       {/* Header */}
-      <motion.div 
+      <motion.div
         className="p-4 border-b border-sidebar-border"
         initial={{ y: -20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -61,13 +69,16 @@ export const DashbaordSidebar = ({ selectedProject, onProjectSelect, projects, t
       >
         <div className="flex items-center justify-between">
           <h2 className="font-semibold text-lg">TaskMaster</h2>
-          <SettingsDialog settings={settings} onSettingsChange={onSettingsChange} />
+          <SettingsDialog
+            settings={settings}
+            onSettingsChange={onSettingsChange}
+          />
         </div>
       </motion.div>
 
       {/* Main Navigation */}
       <div className="flex-1 p-4 space-y-6">
-        <motion.div 
+        <motion.div
           className="space-y-1"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -86,14 +97,15 @@ export const DashbaordSidebar = ({ selectedProject, onProjectSelect, projects, t
                 variant="ghost"
                 className={cn(
                   "w-full justify-start text-sm font-normal transition-all duration-200",
-                  selectedProject === item.id && "bg-accent text-accent-foreground shadow-sm"
+                  selectedProject === item.id &&
+                    "bg-accent text-accent-foreground shadow-sm",
                 )}
                 onClick={() => onProjectSelect(item.id)}
               >
                 <item.icon className="h-4 w-4 mr-3" />
                 {item.label}
                 {taskCounts[item.id] > 0 && (
-                  <motion.span 
+                  <motion.span
                     className="ml-auto text-xs bg-primary text-primary-foreground rounded-full px-2 py-0.5"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
@@ -108,17 +120,19 @@ export const DashbaordSidebar = ({ selectedProject, onProjectSelect, projects, t
         </motion.div>
 
         {/* Projects Section */}
-        <motion.div 
+        <motion.div
           className="space-y-2"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
           <div className="flex items-center justify-between">
-            <h3 className="text-sm font-medium text-muted-foreground">Projects</h3>
+            <h3 className="text-sm font-medium text-muted-foreground">
+              Projects
+            </h3>
             <CreateProjectDialog onCreateProject={onCreateProject} />
           </div>
-          
+
           <div className="space-y-1">
             {projects.map((project, index) => (
               <motion.div
@@ -133,23 +147,28 @@ export const DashbaordSidebar = ({ selectedProject, onProjectSelect, projects, t
                   variant="ghost"
                   className={cn(
                     "w-full justify-start text-sm font-normal transition-all duration-200",
-                    selectedProject === project.name && "bg-accent text-accent-foreground shadow-sm"
+                    selectedProject === project.name &&
+                      "bg-accent text-accent-foreground shadow-sm",
                   )}
                   onClick={() => onProjectSelect(project.name)}
                 >
-                  <motion.div 
-                    className="h-3 w-3 rounded-full mr-3" 
+                  <motion.div
+                    className="h-3 w-3 rounded-full mr-3"
                     style={{ backgroundColor: project.color }}
                     whileHover={{ scale: 1.2 }}
                     transition={{ type: "spring", stiffness: 400, damping: 25 }}
                   />
                   {project.name}
                   {taskCounts[project.name] > 0 && (
-                    <motion.span 
+                    <motion.span
                       className="ml-auto text-xs bg-primary text-primary-foreground rounded-full px-2 py-0.5"
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
-                      transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 500,
+                        damping: 30,
+                      }}
                     >
                       {taskCounts[project.name]}
                     </motion.span>
@@ -162,7 +181,7 @@ export const DashbaordSidebar = ({ selectedProject, onProjectSelect, projects, t
       </div>
 
       {/* Bottom Navigation */}
-      <motion.div 
+      <motion.div
         className="p-4 border-t border-sidebar-border space-y-1"
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
@@ -181,7 +200,8 @@ export const DashbaordSidebar = ({ selectedProject, onProjectSelect, projects, t
               variant="ghost"
               className={cn(
                 "w-full justify-start text-sm font-normal",
-                selectedProject === item.id && "bg-accent text-accent-foreground"
+                selectedProject === item.id &&
+                  "bg-accent text-accent-foreground",
               )}
               onClick={() => onProjectSelect(item.id)}
             >

@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { useEditor, EditorContent } from '@tiptap/react';
-import StarterKit from '@tiptap/starter-kit';
-import Placeholder from '@tiptap/extension-placeholder';
-import { Button } from '@/components/ui/button';
-import { 
-  Bold, 
-  Italic, 
-  List, 
-  ListOrdered, 
+import { useEditor, EditorContent } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Placeholder from "@tiptap/extension-placeholder";
+import { Button } from "@/components/ui/button";
+import {
+  Bold,
+  Italic,
+  List,
+  ListOrdered,
   Quote,
   Undo,
-  Redo
-} from 'lucide-react';
-import { cn } from '@/lib/utils';
+  Redo,
+} from "lucide-react";
+import { cn } from "@/lib/utils";
 
 interface RichTextEditorProps {
   content: string;
@@ -22,11 +22,11 @@ interface RichTextEditorProps {
   className?: string;
 }
 
-export const RichTextEditor = ({ 
-  content, 
-  onChange, 
+export const RichTextEditor = ({
+  content,
+  onChange,
   placeholder = "Start typing...",
-  className 
+  className,
 }: RichTextEditorProps) => {
   const editor = useEditor({
     extensions: [
@@ -53,66 +53,63 @@ export const RichTextEditor = ({
           variant="ghost"
           size="sm"
           onClick={() => editor.chain().focus().toggleBold().run()}
-          className={cn(
-            "h-8 w-8 p-0",
-            editor.isActive('bold') && "bg-accent"
-          )}
+          className={cn("h-8 w-8 p-0", editor.isActive("bold") && "bg-accent")}
         >
           <Bold className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="sm"
           onClick={() => editor.chain().focus().toggleItalic().run()}
           className={cn(
             "h-8 w-8 p-0",
-            editor.isActive('italic') && "bg-accent"
+            editor.isActive("italic") && "bg-accent",
           )}
         >
           <Italic className="h-4 w-4" />
         </Button>
-        
+
         <div className="w-px h-6 bg-border mx-1" />
-        
+
         <Button
           variant="ghost"
           size="sm"
           onClick={() => editor.chain().focus().toggleBulletList().run()}
           className={cn(
             "h-8 w-8 p-0",
-            editor.isActive('bulletList') && "bg-accent"
+            editor.isActive("bulletList") && "bg-accent",
           )}
         >
           <List className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="sm"
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
           className={cn(
             "h-8 w-8 p-0",
-            editor.isActive('orderedList') && "bg-accent"
+            editor.isActive("orderedList") && "bg-accent",
           )}
         >
           <ListOrdered className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="sm"
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
           className={cn(
             "h-8 w-8 p-0",
-            editor.isActive('blockquote') && "bg-accent"
+            editor.isActive("blockquote") && "bg-accent",
           )}
         >
           <Quote className="h-4 w-4" />
         </Button>
-        
+
         <div className="w-px h-6 bg-border mx-1" />
-        
+
         <Button
           variant="ghost"
           size="sm"
@@ -122,7 +119,7 @@ export const RichTextEditor = ({
         >
           <Undo className="h-4 w-4" />
         </Button>
-        
+
         <Button
           variant="ghost"
           size="sm"
@@ -133,11 +130,11 @@ export const RichTextEditor = ({
           <Redo className="h-4 w-4" />
         </Button>
       </div>
-      
+
       {/* Editor */}
       <div className="p-3">
-        <EditorContent 
-          editor={editor} 
+        <EditorContent
+          editor={editor}
           className="prose prose-sm max-w-none focus:outline-none"
         />
       </div>

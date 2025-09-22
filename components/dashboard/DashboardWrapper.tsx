@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { FC, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -25,14 +25,14 @@ const initialTasks: Task[] = [
     completed: false,
     priority: "high",
     dueDate: "2024-09-25",
-    project: "Work"
+    project: "Work",
   },
   {
-    id: "2", 
+    id: "2",
     title: "Buy groceries",
     completed: false,
     priority: "medium",
-    project: "Personal"
+    project: "Personal",
   },
   {
     id: "3",
@@ -40,7 +40,7 @@ const initialTasks: Task[] = [
     completed: true,
     priority: "low",
     dueDate: "2024-09-23",
-    project: "Personal"
+    project: "Personal",
   },
   {
     id: "4",
@@ -48,15 +48,39 @@ const initialTasks: Task[] = [
     completed: false,
     priority: "high",
     dueDate: "2024-09-26",
-    project: "Work"
-  }
+    project: "Work",
+  },
 ];
 
 const initialProjects: Project[] = [
-  { id: "1", name: "Work", color: "#3B82F6", taskCount: 0, description: "Work-related tasks" },
-  { id: "2", name: "Personal", color: "#10B981", taskCount: 0, description: "Personal tasks and goals" },
-  { id: "3", name: "Shopping", color: "#F59E0B", taskCount: 0, description: "Shopping lists and errands" },
-  { id: "4", name: "Health", color: "#EF4444", taskCount: 0, description: "Health and fitness goals" }
+  {
+    id: "1",
+    name: "Work",
+    color: "#3B82F6",
+    taskCount: 0,
+    description: "Work-related tasks",
+  },
+  {
+    id: "2",
+    name: "Personal",
+    color: "#10B981",
+    taskCount: 0,
+    description: "Personal tasks and goals",
+  },
+  {
+    id: "3",
+    name: "Shopping",
+    color: "#F59E0B",
+    taskCount: 0,
+    description: "Shopping lists and errands",
+  },
+  {
+    id: "4",
+    name: "Health",
+    color: "#EF4444",
+    taskCount: 0,
+    description: "Health and fitness goals",
+  },
 ];
 
 const DashboardWrapper: FC = () => {
@@ -82,33 +106,37 @@ const DashboardWrapper: FC = () => {
     animationsEnabled: true,
     autoSync: true,
     timeFormat: "12h",
-    dateFormat: "mdy"
+    dateFormat: "mdy",
   });
 
   const handleToggleTask = (id: string) => {
-    setTasks(tasks.map(task => 
-      task.id === id ? { ...task, completed: !task.completed } : task
-    ));
+    setTasks(
+      tasks.map((task) =>
+        task.id === id ? { ...task, completed: !task.completed } : task,
+      ),
+    );
   };
 
   const handleDeleteTask = (id: string) => {
-    setTasks(tasks.filter(task => task.id !== id));
+    setTasks(tasks.filter((task) => task.id !== id));
   };
 
   const handleAddTask = (newTask: Omit<Task, "id" | "completed">) => {
     const task: Task = {
       ...newTask,
       id: Date.now().toString(),
-      completed: false
+      completed: false,
     };
     setTasks([...tasks, task]);
   };
 
-  const handleCreateProject = (newProject: Omit<Project, "id" | "taskCount">) => {
+  const handleCreateProject = (
+    newProject: Omit<Project, "id" | "taskCount">,
+  ) => {
     const project: Project = {
       ...newProject,
       id: Date.now().toString(),
-      taskCount: 0
+      taskCount: 0,
     };
     setProjects([...projects, project]);
   };
@@ -118,8 +146,8 @@ const DashboardWrapper: FC = () => {
 
     // Filter by search query
     if (searchQuery) {
-      filtered = filtered.filter(task => 
-        task.title.toLowerCase().includes(searchQuery.toLowerCase())
+      filtered = filtered.filter((task) =>
+        task.title.toLowerCase().includes(searchQuery.toLowerCase()),
       );
     }
 
@@ -127,13 +155,13 @@ const DashboardWrapper: FC = () => {
     if (selectedProject === "inbox") {
       return filtered;
     } else if (selectedProject === "today") {
-      const today = new Date().toISOString().split('T')[0];
-      return filtered.filter(task => task.dueDate === today);
+      const today = new Date().toISOString().split("T")[0];
+      return filtered.filter((task) => task.dueDate === today);
     } else if (selectedProject === "upcoming") {
-      const today = new Date().toISOString().split('T')[0];
-      return filtered.filter(task => task.dueDate && task.dueDate > today);
-    } else if (projects.find(p => p.name === selectedProject)) {
-      return filtered.filter(task => task.project === selectedProject);
+      const today = new Date().toISOString().split("T")[0];
+      return filtered.filter((task) => task.dueDate && task.dueDate > today);
+    } else if (projects.find((p) => p.name === selectedProject)) {
+      return filtered.filter((task) => task.project === selectedProject);
     }
 
     return filtered;
@@ -141,13 +169,23 @@ const DashboardWrapper: FC = () => {
 
   const getTaskCounts = () => {
     const counts: Record<string, number> = {
-      inbox: tasks.filter(t => !t.completed).length,
-      today: tasks.filter(t => !t.completed && t.dueDate === new Date().toISOString().split('T')[0]).length,
-      upcoming: tasks.filter(t => !t.completed && t.dueDate && t.dueDate > new Date().toISOString().split('T')[0]).length,
+      inbox: tasks.filter((t) => !t.completed).length,
+      today: tasks.filter(
+        (t) =>
+          !t.completed && t.dueDate === new Date().toISOString().split("T")[0],
+      ).length,
+      upcoming: tasks.filter(
+        (t) =>
+          !t.completed &&
+          t.dueDate &&
+          t.dueDate > new Date().toISOString().split("T")[0],
+      ).length,
     };
 
-    projects.forEach(project => {
-      counts[project.name] = tasks.filter(t => !t.completed && t.project === project.name).length;
+    projects.forEach((project) => {
+      counts[project.name] = tasks.filter(
+        (t) => !t.completed && t.project === project.name,
+      ).length;
     });
 
     return counts;
@@ -164,7 +202,7 @@ const DashboardWrapper: FC = () => {
   };
 
   return (
-    <motion.div 
+    <motion.div
       className="flex h-screen bg-background"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -179,14 +217,14 @@ const DashboardWrapper: FC = () => {
         settings={settings}
         onSettingsChange={setSettings}
       />
-      
-      <motion.div 
+
+      <motion.div
         className="flex-1 flex flex-col"
         initial={{ x: 20, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}
         transition={{ duration: 0.3, delay: 0.1 }}
       >
-        <motion.header 
+        <motion.header
           className="border-b px-6 py-4"
           initial={{ y: -20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
@@ -204,7 +242,7 @@ const DashboardWrapper: FC = () => {
                   </Link>
                 </Button>
               </motion.div>
-              <motion.h1 
+              <motion.h1
                 className="text-2xl font-semibold"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -214,7 +252,7 @@ const DashboardWrapper: FC = () => {
               </motion.h1>
             </div>
             <div className="flex items-center gap-2">
-              <motion.div 
+              <motion.div
                 className="relative"
                 initial={{ width: 0 }}
                 animate={{ width: "auto" }}
@@ -240,60 +278,66 @@ const DashboardWrapper: FC = () => {
           </div>
         </motion.header>
 
-        <motion.main 
+        <motion.main
           className="flex-1 overflow-auto"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
           <div className="min-h-full flex items-start justify-center p-6">
-            <motion.div 
+            <motion.div
               className="w-full max-w-3xl space-y-3"
               initial={{ y: 20, opacity: 0 }}
               animate={{ y: 0, opacity: 1 }}
               transition={{ delay: 0.4 }}
             >
-            <motion.div
-              initial={{ scale: 0.95, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              <AddTaskForm
-                onAddTask={handleAddTask}
-                projects={projects}
-                selectedProject={selectedProject === "inbox" ? projects[1]?.name || "Personal" : selectedProject}
-              />
-            </motion.div>
-            
-            <AnimatePresence>
-              {filteredTasks.length === 0 ? (
-                <motion.div 
-                  className="text-center py-12 text-muted-foreground"
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                >
-                  {searchQuery ? "No tasks found matching your search." : "No tasks in this view."}
-                </motion.div>
-              ) : (
-                filteredTasks.map((task, index) => (
+              <motion.div
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <AddTaskForm
+                  onAddTask={handleAddTask}
+                  projects={projects}
+                  selectedProject={
+                    selectedProject === "inbox"
+                      ? projects[1]?.name || "Personal"
+                      : selectedProject
+                  }
+                />
+              </motion.div>
+
+              <AnimatePresence>
+                {filteredTasks.length === 0 ? (
                   <motion.div
-                    key={task.id}
-                    initial={{ opacity: 0, y: 20, scale: 0.95 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: -20, scale: 0.95 }}
-                    transition={{ delay: index * 0.05 }}
-                    layout
+                    className="text-center py-12 text-muted-foreground"
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -20 }}
                   >
-                    <TaskItem
-                      task={task}
-                      onToggle={handleToggleTask}
-                      onDelete={handleDeleteTask}
-                    />
+                    {searchQuery
+                      ? "No tasks found matching your search."
+                      : "No tasks in this view."}
                   </motion.div>
-                ))
-              )}
-            </AnimatePresence>
+                ) : (
+                  filteredTasks.map((task, index) => (
+                    <motion.div
+                      key={task.id}
+                      initial={{ opacity: 0, y: 20, scale: 0.95 }}
+                      animate={{ opacity: 1, y: 0, scale: 1 }}
+                      exit={{ opacity: 0, y: -20, scale: 0.95 }}
+                      transition={{ delay: index * 0.05 }}
+                      layout
+                    >
+                      <TaskItem
+                        task={task}
+                        onToggle={handleToggleTask}
+                        onDelete={handleDeleteTask}
+                      />
+                    </motion.div>
+                  ))
+                )}
+              </AnimatePresence>
             </motion.div>
           </div>
         </motion.main>
@@ -302,4 +346,4 @@ const DashboardWrapper: FC = () => {
   );
 };
 
-export default DashboardWrapper
+export default DashboardWrapper;
