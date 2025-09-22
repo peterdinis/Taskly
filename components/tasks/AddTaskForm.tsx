@@ -1,8 +1,10 @@
-import { useState } from "react";
+"use client"
+
+import { useState, FormEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Plus, Flag, Calendar } from "lucide-react";
+import { Plus, Flag } from "lucide-react";
 import { Task } from "./TaskItem";
 
 interface Project {
@@ -26,7 +28,7 @@ const AddTaskForm = ({ onAddTask, projects, selectedProject }: AddTaskFormProps)
   const [dueDate, setDueDate] = useState("");
   const [project, setProject] = useState(selectedProject);
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     if (!title.trim()) return;
 

@@ -5,9 +5,9 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { MoreHorizontal, Search, ArrowLeft } from "lucide-react";
 import { Input } from "@/components/ui/input";
+import Link from "next/link";
 import TaskItem, { Task } from "../tasks/TaskItem";
 import { DashbaordSidebar } from "./DashboardSidebar";
-import Link from "next/link";
 import AddTaskForm from "../tasks/AddTaskForm";
 
 interface Project {
@@ -72,7 +72,17 @@ const DashboardWrapper: FC = () => {
     autoSave: true,
     theme: "blue",
     fontSize: 14,
-    language: "en"
+    language: "en",
+    emailNotifications: true,
+    taskReminders: true,
+    weeklyDigest: false,
+    dataBackup: true,
+    analyticsTracking: false,
+    keyboardShortcuts: true,
+    animationsEnabled: true,
+    autoSync: true,
+    timeFormat: "12h",
+    dateFormat: "mdy"
   });
 
   const handleToggleTask = (id: string) => {
@@ -231,17 +241,18 @@ const DashboardWrapper: FC = () => {
         </motion.header>
 
         <motion.main 
-          className="flex-1 p-6 overflow-auto"
+          className="flex-1 overflow-auto"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.3 }}
         >
-          <motion.div 
-            className="max-w-2xl space-y-3"
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
+          <div className="min-h-full flex items-start justify-center p-6">
+            <motion.div 
+              className="w-full max-w-3xl space-y-3"
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.4 }}
+            >
             <motion.div
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
@@ -283,11 +294,12 @@ const DashboardWrapper: FC = () => {
                 ))
               )}
             </AnimatePresence>
-          </motion.div>
+            </motion.div>
+          </div>
         </motion.main>
       </motion.div>
     </motion.div>
   );
 };
 
-export default DashboardWrapper;
+export default DashboardWrapper
