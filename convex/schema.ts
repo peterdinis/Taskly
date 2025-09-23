@@ -8,14 +8,28 @@ export default defineSchema({
     email: v.string(),
     image: v.optional(v.string()),
     tokenIdentifier: v.string(),
-    subscriptionTier: v.union(v.literal("free"), v.literal("pro"), v.literal("business")),
+    subscriptionTier: v.union(
+      v.literal("free"),
+      v.literal("pro"),
+      v.literal("business"),
+    ),
     subscriptionEnds: v.optional(v.number()),
     timezone: v.string(),
-    preferences: v.optional(v.object({
-      theme: v.union(v.literal("light"), v.literal("dark"), v.literal("system")),
-      startOfWeek: v.union(v.literal("sunday"), v.literal("monday")),
-      defaultView: v.union(v.literal("inbox"), v.literal("today"), v.literal("upcoming"))
-    }))
+    preferences: v.optional(
+      v.object({
+        theme: v.union(
+          v.literal("light"),
+          v.literal("dark"),
+          v.literal("system"),
+        ),
+        startOfWeek: v.union(v.literal("sunday"), v.literal("monday")),
+        defaultView: v.union(
+          v.literal("inbox"),
+          v.literal("today"),
+          v.literal("upcoming"),
+        ),
+      }),
+    ),
   })
     .index("by_token", ["tokenIdentifier"])
     .index("by_email", ["email"]),
@@ -32,7 +46,7 @@ export default defineSchema({
     position: v.number(), // for sorting
     view: v.union(v.literal("list"), v.literal("board")),
     createdAt: v.number(),
-    updatedAt: v.number()
+    updatedAt: v.number(),
   })
     .index("by_user", ["userId"])
     .index("by_team", ["teamId"])
@@ -46,7 +60,12 @@ export default defineSchema({
     userId: v.id("users"),
     assigneeId: v.optional(v.id("users")), // for collaboration
     dueDate: v.optional(v.number()), // timestamp
-    priority: v.union(v.literal("p1"), v.literal("p2"), v.literal("p3"), v.literal("p4")),
+    priority: v.union(
+      v.literal("p1"),
+      v.literal("p2"),
+      v.literal("p3"),
+      v.literal("p4"),
+    ),
     labels: v.array(v.string()),
     isCompleted: v.boolean(),
     completedAt: v.optional(v.number()),
@@ -58,7 +77,7 @@ export default defineSchema({
     estimatedDuration: v.optional(v.number()), // in minutes
     timeSpent: v.optional(v.number()), // total time spent in minutes
     createdAt: v.number(),
-    updatedAt: v.number()
+    updatedAt: v.number(),
   })
     .index("by_project", ["projectId"])
     .index("by_user", ["userId"])
@@ -73,7 +92,7 @@ export default defineSchema({
     projectId: v.id("projects"),
     userId: v.id("users"),
     position: v.number(),
-    isArchived: v.boolean()
+    isArchived: v.boolean(),
   })
     .index("by_project", ["projectId"])
     .index("by_user", ["userId"]),
@@ -86,7 +105,7 @@ export default defineSchema({
     parentCommentId: v.optional(v.id("comments")), // for threaded comments
     isEdited: v.boolean(),
     createdAt: v.number(),
-    updatedAt: v.number()
+    updatedAt: v.number(),
   })
     .index("by_task", ["taskId"])
     .index("by_user", ["userId"]),
@@ -98,8 +117,8 @@ export default defineSchema({
     userId: v.id("users"),
     projectId: v.optional(v.id("projects")), // project-specific labels
     isGlobal: v.boolean(), // user-wide labels
-    createdAt: v.number()
+    createdAt: v.number(),
   })
     .index("by_user", ["userId"])
-    .index("by_project", ["projectId"])
+    .index("by_project", ["projectId"]),
 });
